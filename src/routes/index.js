@@ -1,13 +1,13 @@
 import React from 'react';
 import { Scene, Stack } from 'react-native-router-flux';
-import Welcome from '../components/Welcome';
+import WelcomeContainer from '../containers/Welcome';
 
 const Index = (
 <Stack hideNavBar>
   <Scene
     key="welcome"
     title="welcome"
-    component={Welcome}
+    component={WelcomeContainer}
   />
 </Stack>
 );
