@@ -1,16 +1,14 @@
 import React from 'react';
-import { Scene, Tabs, Stack } from 'react-native-router-flux';
-import { Icon } from 'native-base';
-import  Home  from '../components/Home';
+import { Scene, Stack } from 'react-native-router-flux';
+import Welcome from '../components/Welcome';
 
 const Index = (
-<Stack>
-<Scene
-    back
+<Stack hideNavBar>
+  <Scene
     key="home"
-    title="HOME"
-    component={Home}
-/>
+    title="welcom"
+    component={Welcome}
+  />
 </Stack>
 );
 
