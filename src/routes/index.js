@@ -5,8 +5,8 @@ import Welcome from '../components/Welcome';
 const Index = (
 <Stack hideNavBar>
   <Scene
-    key="home"
-    title="welcom"
+    key="welcome"
+    title="welcome"
     component={Welcome}
   />
 </Stack>

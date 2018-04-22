@@ -1,16 +1,29 @@
-import React from 'react';
-import { StatusBar, Platform, View, Text } from 'react-native';
-import { Stack } from 'react-native-router-flux';
-import Routes from './src/routes';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { persistStore, persistCombineReducers, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/es/storage';
+import thunk from 'redux-thunk';
+import appReducer from '../reducers/index';
 
-if (Platform.OS === 'android') StatusBar.setHidden(true);
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
-const Root = () => (
-	<View>
-   <Stack key="root">
-    {Routes}
-   </Stack>
- </View>
-);
+const persistedReducer = persistCombineReducers(persistConfig, appReducer);
+const middleware = [thunk];
 
-export default Root;
+const configureStore = () => {
+  const store = createStore(
+    persistedReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    compose(applyMiddleware(...middleware)),
+  );
+  const persistor = persistStore(
+    store,
+    null,
+    () => { store.getState(); },
+  );
+  return { persistor, store };
+};
+
+export default configureStore;
