@@ -2,6 +2,7 @@ import React from 'react';
 import { Scene, Stack } from 'react-native-router-flux';
 import WelcomeComponent from '../components/Welcome';
 import LoginContainer from '../containers/Login';
+import SignupContainer from '../containers/SignUp';
 
 const Index = (
 <Stack hideNavBar>
@@ -14,6 +15,11 @@ const Index = (
     key="login"
     title="Login"
     component={LoginContainer}
+  />
+  <Scene
+    key="signup"
+    title="SignUp"
+    component={SignupContainer}
   />
 </Stack>
 );

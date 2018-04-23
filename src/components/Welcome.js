@@ -23,7 +23,7 @@ const Welcome = () => (
                 <Text>Login</Text>
               </Body>
           </ListItem>
-          <ListItem icon>
+          <ListItem onPress={Actions.signup} icon>
             <Left>
               <Icon name="add-circle" />
             </Left>

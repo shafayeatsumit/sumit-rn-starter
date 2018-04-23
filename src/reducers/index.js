@@ -7,6 +7,20 @@ const rehydrated = (state = false, action) => {
   }
 };
 
+const status = () => ({
+  loading: false,
+  info: null,
+  error: null,
+  success: null,
+});
+
+const member = () => ({
+  loading: false,
+  error: null,
+});
+
 export default {
   rehydrated,
+  status,
+  member,
 };
