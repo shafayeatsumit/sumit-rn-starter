@@ -1,15 +1,40 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
+import { Container, Content, List, ListItem, Body, Left, Text, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import Header from './Header';
 
 const Welcome = () => (
-  <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-    <TouchableOpacity onPress={() => Actions.login()}>
-      <Text style={{ fontSize: 20 }}>
-        Click to Go to login page.......
-      </Text>
-    </TouchableOpacity>
-  </View>
+  <Container>
+    <Content>
+      <List>
+        <View>
+          <Content padder>
+            <Header
+              title="Hi there,"
+              content="Please login to gain extra access"
+            />
+          </Content>
+          <ListItem onPress={Actions.login} icon>
+              <Left>
+                <Icon name="power" />
+              </Left>
+              <Body>
+                <Text>Login</Text>
+              </Body>
+          </ListItem>
+          <ListItem icon>
+            <Left>
+              <Icon name="add-circle" />
+            </Left>
+            <Body>
+              <Text>Sign Up</Text>
+            </Body>
+          </ListItem>
+        </View>
+      </List>
+    </Content>
+  </Container>
 );
 
 export default Welcome;

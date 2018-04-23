@@ -1,6 +1,6 @@
 import React from 'react';
 import { Scene, Stack } from 'react-native-router-flux';
-import WelcomeContainer from '../containers/Welcome';
+import WelcomeComponent from '../components/Welcome';
 import LoginContainer from '../containers/Login';
 
 const Index = (
@@ -8,7 +8,7 @@ const Index = (
   <Scene
     key="welcome"
     title="welcome"
-    component={WelcomeContainer}
+    component={WelcomeComponent}
   />
   <Scene
     key="login"
