@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoginComponent from '../components/Login';
-
+import { login } from '../actions/Member';
 
 const Login = ({
   onFormSubmit,
@@ -45,5 +45,8 @@ const mapStateToProps = state => ({
   successMessage: null,
 });
 
+const mapDispatchToProps = {
+  onFormSubmit: login,
+};
 
-export default connect(mapStateToProps, null)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
