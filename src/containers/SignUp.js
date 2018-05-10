@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SignUpComponent from '../components/SingUp';
-import signUp from '../actions/Member';
+import { signUp } from '../actions/Member';
 
 const SignUp = ({
   member,
@@ -38,7 +38,7 @@ SignUp.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  console.log('=>', state);
+  console.log('');
   return ({
     member: state.member || {},
     isLoading: state.status.loading || false,

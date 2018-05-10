@@ -1,3 +1,5 @@
+import status from './status';
+
 const rehydrated = (state = false, action) => {
   switch (action.type) {
     case 'persist/REHYDRATE':
@@ -7,12 +9,12 @@ const rehydrated = (state = false, action) => {
   }
 };
 
-const status = () => ({
-  loading: false,
-  info: null,
-  error: null,
-  success: null,
-});
+// const status = () => ({
+//   loading: false,
+//   info: null,
+//   error: null,
+//   success: null,
+// });
 
 const member = () => ({
   loading: false,

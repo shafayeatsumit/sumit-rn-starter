@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Form, Item, Label, Input, Text, Button } from 'native-base';
+import { Container, View, Content, Form, Item, Label, Input, Text, Button } from 'native-base';
+import { TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Messages from './Messages';
@@ -16,12 +17,10 @@ class Login extends Component {
     loading: PropTypes.bool.isRequired,
     onFormSubmit: PropTypes.func.isRequired,
   }
-
   static defaultProps = {
     error: null,
     member: {},
   }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +29,7 @@ class Login extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    // this.handleSingupPress = this.handleSingupPress(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -44,6 +44,10 @@ class Login extends Component {
     this.props.onFormSubmit(this.state);
   }
 
+  handleSingupPress = () => {
+    Actions.signup();
+  }
+
   render() {
     const { loading, error } = this.props;
 
@@ -56,32 +60,37 @@ class Login extends Component {
             title="Welcome back"
             content="Please use your email and password to login."
           />
-            {error && <Messages message={error} />}
 
-            <Form>
-              <Item stackedLabel>
-                <Label>Email</Label>
-                <Input
-                  autoCapitalize="none"
-                  value={this.state.email}
-                  keyboardType="email-address"
-                  onChangeText={v => this.handleChange('email', v)}
-                />
-              </Item>
-              <Item stackedLabel>
-                  <Label>Password</Label>
-                  <Input
-                    secureTextEntry
-                    onChangeText={v => this.handleChange('password', v)}
-                  />
-              </Item>
-              <Spacer size={20} />
+          {error && <Messages message={error} />}
 
-              <Button block onPress={this.handleSubmit}>
-                <Text> Login </Text>
-              </Button>
-            </Form>
+          <Form>
+            <Item stackedLabel>
+              <Label>Email</Label>
+              <Input
+                autoCapitalize="none"
+                value={this.state.email}
+                keyboardType="email-address"
+                onChangeText={v => this.handleChange('email', v)}
+              />
+            </Item>
+            <Item stackedLabel>
+              <Label>Password</Label>
+              <Input
+                secureTextEntry
+                onChangeText={v => this.handleChange('password', v)}
+              />
+            </Item>
 
+            <Spacer size={20} />
+
+            <Button block onPress={this.handleSubmit}>
+              <Text>Login</Text>
+            </Button>
+            <Spacer size={10} />
+            <TouchableOpacity onPress={this.handleSingupPress}>
+              <Text style={{ textDecorationLine: 'underline' }}>Signup Here</Text>
+            </TouchableOpacity>
+          </Form>
         </Content>
       </Container>
     );

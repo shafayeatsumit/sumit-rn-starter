@@ -12,14 +12,18 @@ const Index = (
     component={WelcomeComponent}
   />
   <Scene
+    back
     key="login"
     title="Login"
     component={LoginContainer}
   />
   <Scene
+    back
     key="signup"
     title="SignUp"
+    hideNavBar={false}
     component={SignupContainer}
+    initial
   />
 </Stack>
 );
