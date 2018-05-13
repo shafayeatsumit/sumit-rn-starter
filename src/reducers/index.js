@@ -1,4 +1,5 @@
 import status from './status';
+import member from './member';
 
 const rehydrated = (state = false, action) => {
   switch (action.type) {
@@ -8,18 +9,6 @@ const rehydrated = (state = false, action) => {
       return state;
   }
 };
-
-// const status = () => ({
-//   loading: false,
-//   info: null,
-//   error: null,
-//   success: null,
-// });
-
-const member = () => ({
-  loading: false,
-  error: null,
-});
 
 export default {
   rehydrated,

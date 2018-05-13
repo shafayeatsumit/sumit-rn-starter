@@ -46,6 +46,28 @@ export const signUp = (formData) => {
   };
 };
 
+const getUserData = (dispatch) => {
+  const UID = (
+    FirebaseRef
+    && Firebase
+    && Firebase.auth()
+    && Firebase.auth().currentUser
+    && Firebase.auth().currentUser.uid
+  ) ? Firebase.auth().currentUser.uid : null;
+
+  if (!UID) return false;
+
+  const ref = FirebaseRef.child(`users/${UID}`);
+
+  return ref.on('value', (snapshot) => {
+    const userData = snapshot.val() || [];
+    return dispatch({
+      type: 'USER_DETAILS_UPDATE',
+      data: userData,
+    });
+  });
+};
+
 export const login = (formData) => {
   const {
     email,
@@ -53,17 +75,29 @@ export const login = (formData) => {
   } = formData;
 
   return async (dispatch) => {
-    const UID = (
-      FirebaseRef
-      && Firebase
-      && Firebase.auth()
-      && Firebase.auth().currentUser
-      && Firebase.auth().currentUser.uid
-    ) ? Firebase.auth().currentUser.uid : null;
-    const ref = FirebaseRef.child(`users/${UID}`);
-    ref.on('value', (snapshot) => {
-      const userData = snapshot.val();
-      console.log('user data', userData);
-    });
+    await statusMessage(dispatch, 'loading', true);
+
+    // validation checks
+    if (!email) throw new UserException('missing Email');
+    if (!password) throw new UserException('missing Password');
+    try {
+      const res = await Firebase.auth().signInWithEmailAndPassword(email, password);
+      if (res && res.uid) {
+        // Update last logged in data
+        FirebaseRef.child(`users/${res.uid}`).update({
+          lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
+        });
+        getUserData(dispatch);
+      }
+      await statusMessage(dispatch, 'loading', false);
+      // send user data to redux store
+      return dispatch({
+        type: 'USER_LOGIN',
+        data: res,
+      });
+    } catch (err) {
+      await statusMessage(dispatch, 'error', err.message);
+      throw err.message;
+    }
   };
 };

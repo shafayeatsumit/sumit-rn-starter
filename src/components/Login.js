@@ -40,8 +40,9 @@ class Login extends Component {
     });
   }
 
-  handleSubmit = () => {
-    this.props.onFormSubmit(this.state);
+  handleSubmit = async () => {
+    await this.props.onFormSubmit(this.state);
+    Actions.welcome();
   }
 
   handleSingupPress = () => {
@@ -49,10 +50,9 @@ class Login extends Component {
   }
 
   render() {
+    console.log('current member', this.props.member);
     const { loading, error } = this.props;
-
     if (loading) return <Loading />;
-
     return (
       <Container>
         <Content padder>

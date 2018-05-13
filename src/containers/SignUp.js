@@ -37,16 +37,13 @@ SignUp.defaultProps = {
   successMessage: null,
 };
 
-const mapStateToProps = (state) => {
-  console.log('');
-  return ({
-    member: state.member || {},
-    isLoading: state.status.loading || false,
-    infoMessage: state.status.infor || null,
-    errorMessage: state.status.error || null,
-    successMessage: state.status.success || null,
-  });
-};
+const mapStateToProps = state => ({
+  member: state.member || {},
+  isLoading: state.status.loading || false,
+  infoMessage: state.status.infor || null,
+  errorMessage: state.status.error || null,
+  successMessage: state.status.success || null,
+});
 
 const mapDispatchToProps = {
   onFormSubmit: signUp,

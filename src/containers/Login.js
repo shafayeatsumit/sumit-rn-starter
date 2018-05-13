@@ -38,11 +38,11 @@ Login.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  member: {},
-  isLoading: false,
-  infoMessage: null,
-  errorMessage: null,
-  successMessage: null,
+  member: state.member || {},
+  isLoading: state.status.loading || false,
+  infoMessage: state.status.info || null,
+  errorMessage: state.status.error || null,
+  successMessage: state.status.success || null,
 });
 
 const mapDispatchToProps = {
